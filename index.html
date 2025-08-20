@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potencia Tu Mente con Matemáticas</title>
+    
+    <!-- Librerías Externas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* --- ESTILOS GENERALES (CSS) --- */
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #7c3aed;
+            --glow-color-1: rgba(79, 70, 229, 0.6);
+            --glow-color-2: rgba(124, 58, 237, 0.7);
+            --dark-bg: #111827;
+            --light-bg: #1f2937;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            /* FONDO LLAMATIVO Y ANIMADO */
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #111827);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            background-attachment: fixed;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* --- Contenedor de Páginas --- */
+        main > section {
+            display: none;
+            animation: fadeIn 0.6s;
+        }
+        main > section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Página de Inicio --- */
+        .page-body, .inicio-body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .inicio-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .inicio-text {
+            max-width: 500px;
+        }
+
+        /* LETRAS LLAMATIVAS (TÍTULO PRINCIPAL) */
+        .inicio-text h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #d8b4fe, #a78bfa, #f3f4f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 25px rgba(167, 139, 250, 0.4);
+        }
+
+        .inicio-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-iniciar {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 0 20px var(--glow-color-1);
+        }
+
+        .btn-iniciar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px var(--glow-color-2);
+        }
+
+        .inicio-image img {
+            max-width: 450px;
+            width: 100%;
+            border-radius: 20px; /* Borde redondeado para la nueva imagen */
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* --- Página de Menú --- */
+        .menu-body {
+            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+        
+        .menu-body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, rgba(79, 70, 229, 0.3), rgba(124, 58, 237, 0.3));
+            backdrop-filter: blur(8px);
+        }
+
+        .menu-container {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--glow-color-2);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            background: var(--primary-color);
+            border-color: var(--glow-color-2);
+            box-shadow: 0 0 20px var(--glow-color-1);
+        }
+
+        .menu-item i {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--glow-color-1);
+        }
+
+        .menu-item span {
+            font-weight: 600;
+        }
+
+        /* --- Páginas Internas y Contenedores con Efecto Neón --- */
+        .page-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(31, 41, 55, 0.8);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--glow-color-1);
+            box-shadow: 0 0 25px rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+        }
+        .page-container.large { max-width: 1200px; }
+
+        /* LETRAS LLAMATIVAS (TÍTULOS INTERNOS) */
+        .page-container h1, .page-container h2 {
+            text-shadow: 0 0 8px var(--glow-color-2);
+        }
+        .page-container h1 { text-align: center; margin-bottom: 0.5rem; color: white; }
+        .subtitulo { text-align: center; color: var(--text-muted); margin-bottom: 2rem; }
+
+        .btn-retroceder {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 15px var(--glow-color-1);
+        }
+        .btn-retroceder:hover {
+            background: var(--secondary-color);
+            box-shadow: 0 0 25px var(--glow-color-2);
+        }
+
+        /* --- Estilos para la página de Conceptos --- */
+        .tabs { display: flex; justify-content: center; margin-bottom: 2rem; background: var(--dark-bg); border-radius: 10px; overflow: hidden; flex-wrap: wrap; }
+        .tab-button { flex: 1; padding: 1rem; border: none; background: transparent; color: var(--text-muted); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; min-width: 120px; }
+        .tab-button:hover { background: #2d3748; color: white; }
+        .tab-button.active { color: white; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* --- Estilos para la página de Práctica --- */
+        .practice-topic { margin-bottom: 2.5rem; }
+        .practice-topic-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .practice-topic-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--glow-color-1);
+        }
+        .practice-topic-header h2 { font-size: 2rem; }
+        .accordion-item { background: var(--dark-bg); border-radius: 8px; margin-bottom: 0.5rem; overflow: hidden; }
+        .accordion-header { width: 100%; background: transparent; border: none; padding: 1rem 1.5rem; font-size: 1.1rem; color: var(--text-color); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .accordion-header::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; transition: transform 0.3s ease; }
+        .accordion-header.active::after { transform: rotate(180deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 1.5rem; }
+        .accordion-content ol { padding: 0rem 1.5rem 1.5rem 2rem; }
+        .accordion-content li { margin-bottom: 1rem; line-height: 1.6; color: var(--text-muted); }
+        .accordion-content li strong { color: var(--text-color); }
+        
+        /* Resto de estilos (sin cambios significativos) */
+        .content-box p, .content-box li { line-height: 1.8; margin-bottom: 1rem; }
+        .content-box ul, .content-box ol { padding-left: 25px; }
+        .content-box h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--secondary-color); text-shadow: 0 0 5px var(--glow-color-2); }
+        .concept-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; overflow-x: auto; display: block; }
+        .concept-table th, .concept-table td { border: 1px solid #374151; padding: 0.8rem; text-align: center; }
+        .concept-table th { background-color: var(--primary-color); }
+        .fraction-visual { display: flex; align-items: center; gap: 10px; margin: 1rem 0; }
+        .fraction-visual .part { width: 50px; height: 50px; border: 2px solid var(--primary-color); border-radius: 5px; }
+        .fraction-visual .part.filled { background-color: var(--secondary-color); }
+        .consejo { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding: 1.5rem; background: var(--dark-bg); border-radius: 10px; }
+        .consejo-icon { font-size: 2rem; color: var(--primary-color); padding-top: 5px; }
+        .consejo-text h3 { margin-bottom: 0.5rem; }
+        .schedule-container { overflow-x: auto; }
+        .schedule-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .schedule-table th, .schedule-table td { border: 1px solid #374151; padding: 1rem; text-align: center; min-width: 120px; }
+        .schedule-table th { background-color: var(--primary-color); }
+        .schedule-table tbody tr:nth-child(odd) { background-color: #1f2937; }
+        .schedule-table tbody tr:nth-child(even) { background-color: #263142; }
+        .schedule-table td[contenteditable="true"]:focus { background-color: var(--secondary-color); outline: 2px solid var(--primary-color); color: white; box-shadow: 0 0 15px var(--glow-color-1) inset; }
+
+        @media (max-width: 768px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+            .inicio-container { flex-direction: column; text-align: center; }
+            .inicio-text { max-width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .page-container { padding: 1.5rem; }
+            .menu-container { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <!-- SECCIÓN 1: INICIO -->
+        <section id="inicio" class="active">
+            <div class="inicio-body">
+                <div class="inicio-container">
+                    <div class="inicio-text">
+                        <h1>POTENCIA TU MENTE<br>CON MATEMÁTICAS</h1>
+                        <p>APRENDE PASO A PASO, CON EJEMPLOS Y EXPLICACIONES CLARAS</p>
+                        <a href="#menu" class="btn-iniciar nav-link">Iniciar</a>
+                    </div>
+                    <div class="inicio-image">
+                        <!-- IMAGEN ACTUALIZADA AQUÍ -->
+                        <img src="https://cdn.gamma.app/fd2nbdukzak0mr8/generated-images/N2oZlD9AiPX7gnnjvVz2L.jpg" alt="Estudiante aprendiendo con su laptop">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: MENÚ -->
+        <section id="menu">
+            <div class="menu-body">
+                <div class="menu-container">
+                    <h2>ELIGE LO QUE DESEAS REFORZAR</h2>
+                    <div class="menu-grid">
+                        <a href="#conceptos" class="menu-item nav-link"><i class="fas fa-book-open"></i><span>CONCEPTOS</span></a>
+                        <a href="#consejos" class="menu-item nav-link"><i class="fas fa-lightbulb"></i><span>CONSEJOS</span></a>
+                        <a href="#practica" class="menu-item nav-link"><i class="fas fa-brain"></i><span>PRÁCTICA</span></a>
+                        <a href="#quienes-somos" class="menu-item nav-link"><i class="fas fa-users"></i><span>¿QUIÉNES SOMOS?</span></a>
+                        <a href="#organizarte" class="menu-item nav-link"><i class="fas fa-calendar-alt"></i><span>ORGANÍZATE</span></a>
+                        <a href="#inicio" class="menu-item nav-link"><i class="fas fa-house"></i><span>VOLVER AL INICIO</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CONCEPTOS -->
+        <section id="conceptos">
+            <div class="page-body">
+                <div class="page-container large">
+                    <h1>Conceptos Matemáticos Fundamentales</h1>
+                    <p class="subtitulo">Explora, aprende y domina los temas clave.</p>
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="frecuencia">Frecuencia</button>
+                        <button class="tab-button" data-tab="fracciones">Fracciones</button>
+                        <button class="tab-button" data-tab="inecuaciones">Inecuaciones</button>
+                        <button class="tab-button" data-tab="conjuntos">Conjuntos</button>
+                    </div>
+                    <div id="frecuencia" class="tab-content active"><div class="content-box"><h2>Frecuencia en Estadística</h2><h3>¿Qué es?</h3><p>La frecuencia es el número de veces que un valor o dato específico aparece en un conjunto de datos.</p><h3>Tipos de Frecuencia</h3><ul><li><strong>Frecuencia Absoluta (fi):</strong> Es el número exacto de veces que aparece un dato.</li><li><strong>Frecuencia Relativa (hi):</strong> Es la proporción del dato sobre el total (hi = fi / N).</li><li><strong>Frecuencia Acumulada (Fi):</strong> Es la suma de las frecuencias absolutas de valores iguales o inferiores.</li></ul><h3>Ejemplo Práctico</h3><p>Notas de 20 alumnos: 7, 8, 9, 6, 7, 8, 8, 9, 10, 7, 6, 8, 9, 7, 8, 10, 9, 8, 7, 8.</p><div style="overflow-x:auto;"><table class="concept-table"><thead><tr><th>Nota</th><th>F. Absoluta</th><th>F. Relativa</th><th>F. Acumulada</th></tr></thead><tbody><tr><td>6</td><td>2</td><td>0.10</td><td>2</td></tr><tr><td>7</td><td>5</td><td>0.25</td><td>7</td></tr><tr><td>8</td><td>7</td><td>0.35</td><td>14</td></tr><tr><td>9</td><td>4</td><td>0.20</td><td>18</td></tr><tr><td>10</td><td>2</td><td>0.10</td><td>20</td></tr></tbody></table></div><h3>Representación Gráfica</h3><canvas id="frequencyChart" width="400" height="200"></canvas><h3>Errores Comunes</h3><p>Confundir frecuencia absoluta con relativa o sumar incorrectamente las frecuencias acumuladas.</p></div></div>
+                    <div id="fracciones" class="tab-content"><div class="content-box"><h2>Fracciones</h2><h3>¿Qué son?</h3><p>Una fracción representa una parte de un todo. Se compone de un numerador (partes que se tienen) y un denominador (total de partes).</p><h3>Tipos</h3><ul><li><strong>Propias:</strong> Numerador < Denominador (ej. 3/4).</li><li><strong>Impropias:</strong> Numerador ≥ Denominador (ej. 5/4).</li><li><strong>Mixtas:</strong> Un entero y una fracción propia (ej. 1 ¼).</li></ul><h3>Ejemplo y Gráfico (3/4)</h3><div class="fraction-visual"><div class="part filled"></div><div class="part filled"></div><div class="part filled"></div><div class="part"></div><span>3/4</span></div><h3>Errores Comunes</h3><p>Sumar o restar fracciones sin un denominador común. Incorrecto: 1/2 + 1/3 = 2/5. Correcto: 3/6 + 2/6 = 5/6.</p></div></div>
+                    <div id="inecuaciones" class="tab-content"><div class="content-box"><h2>Inecuaciones</h2><h3>¿Qué son?</h3><p>Una inecuación es una desigualdad matemática (con <, >, ≤, ≥). Su solución es un conjunto de valores.</p><h3>Ejemplo y Gráfico (2x - 1 ≥ 5)</h3><p>1. Sumar 1: 2x ≥ 6<br>2. Dividir entre 2: x ≥ 3</p><img src="https://i.imgur.com/gK2T3YF.png" alt="Recta numérica" style="max-width: 100%; border-radius: 8px;"><h3>Errores Comunes</h3><p>Olvidar invertir el signo de desigualdad al multiplicar o dividir por un número negativo.</p></div></div>
+                    <div id="conjuntos" class="tab-content"><div class="content-box"><h2>Teoría de Conjuntos</h2><h3>¿Qué son?</h3><p>Un conjunto es una colección de objetos bien definidos (elementos), representados con llaves { }.</p><h3>Operaciones</h3><ul><li><strong>Unión (∪):</strong> Todos los elementos de los conjuntos.</li><li><strong>Intersección (∩):</strong> Solo los elementos comunes.</li></ul><h3>Ejemplo y Gráfico (Diagrama de Venn)</h3><p>Si A = {1, 2, 3, 4} y B = {3, 4, 5, 6}:<br>A ∪ B = {1, 2, 3, 4, 5, 6}<br>A ∩ B = {3, 4}</p><img src="https://i.imgur.com/xI1tV8G.png" alt="Diagrama de Venn" style="max-width: 100%; border-radius: 8px;"><h3>Errores Comunes</h3><p>Repetir elementos en la unión o confundir unión con intersección.</p></div></div>
+                    <a href="#menu" class="btn-retroceder nav-link">← Volver al Menú</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONSEJOS -->
+        <section id="consejos">
+            <div class="page-body">
+                <div class="page-container">
+                    <h1>Consejos para Mejorar tu Razonamiento</h1>
+                    <p class="subtitulo">Pequeños hábitos que marcan una gran diferencia.</p>
+                    <div class="consejo"><div class="consejo-icon"><i class="fas fa-brain"></i></div><div class="consejo-text"><h3>1. Enfócate en Entender, no en Memorizar</h3><p>Las matemáticas son lógicas. Esfuérzate por entender de dónde vienen las fórmulas en lugar de solo memorizarlas.</p></div></div>
+                    <div class="consejo"><div class="consejo-icon"><i class="fas fa-pencil-alt"></i></div><div class="consejo-text"><h3>2. La Práctica Hace al Maestro</h3><p>Resuelve problemas todos los días, aunque sea por poco tiempo. La consistencia es clave para construir y mantener tus habilidades.</p></div></div>
+                    <div class="consejo"><div class="consejo-icon"><i class="fas fa-check-circle"></i></div><div class="consejo-text"><h3>3. Revisa tus Errores</h3><p>Cuando te equivoques, dedica tiempo a entender exactamente dónde estuvo el error. Aprender de ellos es una de las formas más efectivas de mejorar.</p></div></div>
+                    <div class="consejo"><div class="consejo-icon"><i class="fas fa-lightbulb"></i></div><div class="consejo-text"><h3>4. Dibuja el Problema</h3><p>Muchos problemas se vuelven más claros cuando los visualizas. Haz diagramas, dibujos o tablas para representar la información.</p></div></div>
+                    <a href="#menu" class="btn-retroceder nav-link">← Volver al Menú</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN 5: PRÁCTICA (CON IMÁGENES) -->
+        <section id="practica">
+            <div class="page-body">
+                <div class="page-container large">
+                    <h1>Pon a Prueba tus Conocimientos</h1>
+                    <p class="subtitulo">Selecciona un tema y un nivel para comenzar a practicar.</p>
+                    
+                    <div class="practice-topic">
+                        <div class="practice-topic-header"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Gráficos y datos"><h2>Frecuencia</h2></div>
+                        <div class="accordion">
+                            <div class="accordion-item"><button class="accordion-header">Nivel Fácil</button><div class="accordion-content"><ol>
+                                <li>En la serie {rojo, azul, rojo, verde, rojo}, ¿cuál es la frecuencia absoluta de 'rojo'? <strong>R: 3</strong></li>
+                                <li>¿Cuál es el dato que más se repite (moda) en {5, 6, 7, 6, 5, 6}? <strong>R: 6</strong></li>
+                                <li>Cuenta cuántas veces aparece el número 4 en {1, 4, 2, 4, 3, 4, 5, 4}. <strong>R: 4</strong></li>
+                                <li>En una clase, 5 alumnos prefieren fútbol, 3 baloncesto y 2 tenis. ¿Cuál es la frecuencia del baloncesto? <strong>R: 3</strong></li>
+                                <li>Observa la lista de frutas: {manzana, pera, manzana, naranja, manzana}. Halla la frecuencia de 'manzana'. <strong>R: 3</strong></li>
+                                <li>En el conjunto de notas {10, 8, 9, 10, 8, 10}, ¿cuál es la frecuencia absoluta de la nota 10? <strong>R: 3</strong></li>
+                                <li>¿Qué animal es el más frecuente en {perro, gato, pez, gato, perro, gato}? <strong>R: Gato</strong></li>
+                                <li>Halla la frecuencia del número 1 en {1, 2, 1, 3, 1, 4, 1, 5, 1}. <strong>R: 5</strong></li>
+                                <li>¿Cuál es la moda en el conjunto de colores {amarillo, azul, verde, azul}? <strong>R: Azul</strong></li>
+                                <li>En la lista de edades {12, 13, 12, 13, 12}, ¿qué edad tiene mayor frecuencia? <strong>R: 12</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Intermedio</button><div class="accordion-content"><ol>
+                                <li>En {A, B, A, C, A, B, A, D}, calcula la frecuencia relativa de 'A'. <strong>R: 4/8 = 0.5</strong></li>
+                                <li>Se lanzá un dado 10 veces: {1,5,2,3,5,6,5,4,2,5}. Crea una tabla de frecuencias absolutas para el número 5. <strong>R: 4</strong></li>
+                                <li>En una encuesta a 20 personas, 12 eligen verano y 8 invierno. ¿Cuál es la frecuencia relativa de 'invierno'? <strong>R: 8/20 = 0.4</strong></li>
+                                <li>Las notas de un alumno son {7,8,7,9,8,7,10}. Calcula la frecuencia absoluta y relativa de la nota 7. <strong>R: Absoluta=3, Relativa=3/7</strong></li>
+                                <li>En un grupo de 50 personas, 20 son hombres. ¿Cuál es la frecuencia relativa de mujeres? <strong>R: 30/50 = 0.6</strong></li>
+                                <li>Para los datos {2,3,4,2,3,4,2,3,4,2}, ¿qué dato tiene una frecuencia relativa de 0.4? <strong>R: El 2 (4/10)</strong></li>
+                                <li>Si la frecuencia absoluta de un dato es 5 y el total de datos es 25, ¿cuál es su frecuencia relativa? <strong>R: 5/25 = 0.2</strong></li>
+                                <li>Halla la frecuencia acumulada hasta el valor 4 en la serie ordenada {2,2,3,4,4,4,5}. <strong>R: 2+1+3 = 6</strong></li>
+                                <li>En {rojo, verde, azul, rojo, verde, rojo}, calcula la frecuencia relativa de 'verde'. <strong>R: 2/6 ≈ 0.33</strong></li>
+                                <li>La frecuencia relativa de un evento es 0.15. Si el total de datos es 100, ¿cuál es su frecuencia absoluta? <strong>R: 15</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Difícil</button><div class="accordion-content"><ol>
+                                <li>Las temperaturas de 10 días son: {15,17,16,15,17,18,19,17,15,17}. Construye una tabla completa de frecuencias. <strong>R: f(15)=3, f(16)=1, f(17)=4, f(18)=1, f(19)=1</strong></li>
+                                <li>Con los datos del ejercicio anterior, ¿cuál es la frecuencia relativa acumulada hasta los 17 grados? <strong>R: (3+1+4)/10 = 0.8</strong></li>
+                                <li>En una clase de 30 alumnos, el 20% sacó un 10. ¿Cuál es la frecuencia absoluta de la nota 10? <strong>R: 30 * 0.20 = 6</strong></li>
+                                <li>Si la frecuencia acumulada del valor 'x' es 15 y la del valor anterior era 10, ¿cuál es la frecuencia absoluta de 'x'? <strong>R: 15 - 10 = 5</strong></li>
+                                <li>Se encuestó a 200 personas. 90 prefieren la playa, 60 la montaña y el resto la ciudad. ¿Cuál es la frecuencia relativa de los que prefieren la ciudad? <strong>R: 50/200 = 0.25</strong></li>
+                                <li>La frecuencia relativa de la cara '6' al lanzar un dado fue de 0.2. Si se lanzó 60 veces, ¿cuántas veces salió '6'? <strong>R: 60 * 0.2 = 12</strong></li>
+                                <li>En una tabla, el valor 5 tiene f=8, el valor 6 tiene f=12 y el valor 7 tiene f=5. Si el total es 40 datos, ¿cuál es la frecuencia relativa acumulada hasta el valor 6? <strong>R: (8+12)/40 = 0.5</strong></li>
+                                <li>Una bolsa tiene 5 bolas rojas, 3 azules y 2 verdes. Si sacas una bola 50 veces (devolviéndola), y obtienes 20 rojas, ¿coincide la frecuencia relativa (20/50=0.4) con la probabilidad teórica (5/10=0.5)? <strong>R: No</strong></li>
+                                <li>La moda de un conjunto de 15 datos es 'A' con frecuencia 6. ¿Cuál es la frecuencia relativa de la moda? <strong>R: 6/15 = 0.4</strong></li>
+                                <li>Si la frecuencia relativa de 'Sí' es 0.65, ¿cuál es la frecuencia relativa de 'No'? (Suponiendo que solo hay dos opciones). <strong>R: 1 - 0.65 = 0.35</strong></li>
+                            </ol></div></div>
+                        </div>
+                    </div>
+                    <div class="practice-topic">
+                        <div class="practice-topic-header"><img src="https://images.unsplash.com/photo-1593560704563-f176a2eb61db?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pizza dividida en porciones"><h2>Fracciones</h2></div>
+                        <div class="accordion">
+                            <div class="accordion-item"><button class="accordion-header">Nivel Fácil</button><div class="accordion-content"><ol>
+                                <li>Suma: 2/5 + 1/5. <strong>R: 3/5</strong></li>
+                                <li>Resta: 7/8 - 3/8. <strong>R: 4/8 o 1/2</strong></li>
+                                <li>¿Es 5/3 una fracción propia o impropia? <strong>R: Impropia</strong></li>
+                                <li>¿Qué fracción representa tomar 3 porciones de una pizza dividida en 8? <strong>R: 3/8</strong></li>
+                                <li>Escribe una fracción equivalente a 1/2. <strong>R: 2/4, 3/6, etc.</strong></li>
+                                <li>Compara 1/4 y 3/4. ¿Cuál es mayor? <strong>R: 3/4</strong></li>
+                                <li>Convierte 1 (un entero) a una fracción con denominador 5. <strong>R: 5/5</strong></li>
+                                <li>¿Qué es mayor, 2/7 o 5/7? <strong>R: 5/7</strong></li>
+                                <li>Calcula la mitad de 1/2 (un medio pastel). <strong>R: 1/4</strong></li>
+                                <li>Resta 9/10 - 2/10. <strong>R: 7/10</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Intermedio</button><div class="accordion-content"><ol>
+                                <li>Suma: 1/2 + 1/3. <strong>R: 5/6</strong></li>
+                                <li>Resta: 3/4 - 1/6. <strong>R: 7/12</strong></li>
+                                <li>Simplifica la fracción 18/24. <strong>R: 3/4</strong></li>
+                                <li>Convierte la fracción mixta 2 1/3 a fracción impropia. <strong>R: 7/3</strong></li>
+                                <li>Convierte la fracción impropia 11/4 a fracción mixta. <strong>R: 2 3/4</strong></li>
+                                <li>Multiplica: 2/3 × 4/5. <strong>R: 8/15</strong></li>
+                                <li>Divide: 1/2 ÷ 3/4. <strong>R: 4/6 o 2/3</strong></li>
+                                <li>Juan comió 1/3 de un pastel y Ana 1/4. ¿Qué fracción del pastel comieron en total? <strong>R: 7/12</strong></li>
+                                <li>Calcula los 2/5 de 30. <strong>R: 12</strong></li>
+                                <li>Ordena de menor a mayor: 1/2, 3/5, 2/10. <strong>R: 2/10, 1/2, 3/5</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Difícil</button><div class="accordion-content"><ol>
+                                <li>Calcula: (2/3 + 1/4) × 6/11. <strong>R: (11/12) * (6/11) = 6/12 = 1/2</strong></li>
+                                <li>Un depósito de agua está lleno hasta sus 3/8. Si se añaden 90 litros, se llena hasta la mitad. ¿Cuál es la capacidad total? <strong>R: 1/2 - 3/8 = 1/8. Si 1/8 son 90L, el total es 90*8=720L</strong></li>
+                                <li>Calcula: 2/5 ÷ (3/4 - 1/2). <strong>R: 2/5 ÷ (1/4) = 8/5</strong></li>
+                                <li>En una clase, 3/5 son chicas. Si 1/3 de las chicas son rubias, ¿qué fracción del total de la clase son chicas rubias? <strong>R: 3/5 * 1/3 = 3/15 = 1/5</strong></li>
+                                <li>Tres amigos se reparten una pizza. El primero come 1/3, el segundo 2/5. ¿Qué fracción le queda al tercero? <strong>R: 1 - (1/3 + 2/5) = 1 - 11/15 = 4/15</strong></li>
+                                <li>Un atleta corre 15 km en 3/4 de hora. ¿Cuántos km correrá en una hora y media (3/2 horas)? <strong>R: (15 / 3/4) * 3/2 = 20 * 3/2 = 30 km</strong></li>
+                                <li>Simplifica la expresión: (1/2 + 1/3) / (1/2 - 1/3). <strong>R: (5/6) / (1/6) = 5</strong></li>
+                                <li>He gastado 1/4 de mi dinero y luego 2/3 de lo que me quedaba. Si ahora tengo $100, ¿cuánto tenía al principio? <strong>R: Quedaba 3/4. Gasté 2/3 de 3/4 = 1/2. Gasté 1/4+1/2=3/4. El 1/4 que queda son $100. Total $400.</strong></li>
+                                <li>Una manguera llena un estanque en 3 horas y otra en 6 horas. ¿Cuánto tardarán en llenarlo juntas? <strong>R: 1/3 + 1/6 = 3/6 = 1/2. Juntas llenan 1/2 estanque en 1h. Tardarán 2 horas.</strong></li>
+                                <li>Calcula el valor de x si (x/3) + (x/6) = 3. <strong>R: (2x+x)/6 = 3 => 3x = 18 => x=6</strong></li>
+                            </ol></div></div>
+                        </div>
+                    </div>
+                    <div class="practice-topic">
+                        <div class="practice-topic-header"><img src="https://images.unsplash.com/photo-1596707203125-1e3599988a29?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Balanza de la justicia"><h2>Inecuaciones</h2></div>
+                        <div class="accordion">
+                            <div class="accordion-item"><button class="accordion-header">Nivel Fácil</button><div class="accordion-content"><ol>
+                                <li>Resuelve: x + 5 > 8. <strong>R: x > 3</strong></li>
+                                <li>Resuelve: y - 3 ≤ 2. <strong>R: y ≤ 5</strong></li>
+                                <li>Encuentra los valores de 'a' si 4a ≥ 12. <strong>R: a ≥ 3</strong></li>
+                                <li>¿Qué números cumplen con b / 2 < 3? <strong>R: b < 6</strong></li>
+                                <li>Si tengo menos de 10 caramelos (c), ¿cómo se escribe la inecuación? <strong>R: c < 10</strong></li>
+                                <li>Resuelve: 7 + m < 10. <strong>R: m < 3</strong></li>
+                                <li>Para entrar a la atracción debes tener al menos 12 años (e). Exprésalo. <strong>R: e ≥ 12</strong></li>
+                                <li>Resuelve: 3x > 15. <strong>R: x > 5</strong></li>
+                                <li>Resuelve: p - 1 ≥ 1. <strong>R: p ≥ 2</strong></li>
+                                <li>El coste (c) de un producto es como máximo $50. Escribe la inecuación. <strong>R: c ≤ 50</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Intermedio</button><div class="accordion-content"><ol>
+                                <li>Resuelve: 2x + 1 ≤ 7. <strong>R: x ≤ 3</strong></li>
+                                <li>Resuelve: 3y - 4 > 11. <strong>R: y > 5</strong></li>
+                                <li>Resuelve: a/2 + 5 ≥ 8. <strong>R: a ≥ 6</strong></li>
+                                <li>Encuentra el conjunto solución para 10 - b < 4. <strong>R: b > 6</strong></li>
+                                <li>Resuelve: 5 - 2x ≥ 1. <strong>R: 4 ≥ 2x => x ≤ 2</strong></li>
+                                <li>Resuelve: 4(x + 1) < 12. <strong>R: x + 1 < 3 => x < 2</strong></li>
+                                <li>El doble de un número más 5 es menor que 15. ¿Qué se puede decir del número? <strong>R: 2x+5 < 15 => 2x < 10 => x < 5</strong></li>
+                                <li>Resuelve: (x/3) - 1 > 1. <strong>R: x/3 > 2 => x > 6</strong></li>
+                                <li>Resuelve: 13 ≥ 3m + 4. <strong>R: 9 ≥ 3m => m ≤ 3</strong></li>
+                                <li>Resuelve: 6 + 2p < p + 10. <strong>R: p < 4</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Difícil</button><div class="accordion-content"><ol>
+                                <li>Resuelve: -3x + 7 < 1. <strong>R: -3x < -6 => x > 2 (signo cambia)</strong></li>
+                                <li>Resuelve: 5x - 2 ≥ 3x + 6. <strong>R: 2x ≥ 8 => x ≥ 4</strong></li>
+                                <li>Halla la solución para 2(x - 3) ≤ 5x + 3. <strong>R: 2x-6 ≤ 5x+3 => -9 ≤ 3x => x ≥ -3</strong></li>
+                                <li>Resuelve: (x+1)/3 > 2. <strong>R: x+1 > 6 => x > 5</strong></li>
+                                <li>Encuentra el rango de valores para -2 < x - 3 ≤ 4. <strong>R: 1 < x ≤ 7</strong></li>
+                                <li>Resuelve: 3(y + 2) - 2y > y + 8. <strong>R: 3y+6-2y > y+8 => y+6 > y+8 => 6 > 8 (Sin solución)</strong></li>
+                                <li>Resuelve: |x - 2| ≤ 3. <strong>R: -3 ≤ x-2 ≤ 3 => -1 ≤ x ≤ 5</strong></li>
+                                <li>El triple de la edad de Ana menos 5 años es mayor que el doble de su edad más 3. ¿Cuál es la edad mínima que puede tener? <strong>R: 3e-5 > 2e+3 => e > 8. Mínima edad 9 años.</strong></li>
+                                <li>Resuelve: (2x - 1)/4 < (3x + 2)/2. <strong>R: 2x-1 < 2(3x+2) => 2x-1 < 6x+4 => -5 < 4x => x > -5/4</strong></li>
+                                <li>Resuelve: x² - 9 ≤ 0. <strong>R: (x-3)(x+3)≤0 => -3 ≤ x ≤ 3</strong></li>
+                            </ol></div></div>
+                        </div>
+                    </div>
+                    <div class="practice-topic">
+                        <div class="practice-topic-header"><img src="https://plus.unsplash.com/premium_photo-1679429481395-9852a78121f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Diagrama de Venn"><h2>Conjuntos</h2></div>
+                        <div class="accordion">
+                            <div class="accordion-item"><button class="accordion-header">Nivel Fácil</button><div class="accordion-content"><ol>
+                                <li>Dado A = {1, 2, 3}, ¿es 2 un elemento de A? <strong>R: Sí, 2 ∈ A</strong></li>
+                                <li>Escribe por extensión el conjunto de las vocales. <strong>R: V = {a, e, i, o, u}</strong></li>
+                                <li>¿Es el conjunto de "los meses del año con 32 días" finito, infinito o vacío? <strong>R: Vacío</strong></li>
+                                <li>Dado B = {perro, gato}, ¿es "loro" un elemento de B? <strong>R: No, loro ∉ B</strong></li>
+                                <li>Escribe por extensión el conjunto de los números pares menores que 10. <strong>R: P = {2, 4, 6, 8}</strong></li>
+                                <li>¿Cuántos elementos tiene el conjunto C = {lunes, martes, miércoles}? <strong>R: 3</strong></li>
+                                <li>El conjunto A={x | x es un día de la semana}. ¿Es "sábado" un elemento de A? <strong>R: Sí</strong></li>
+                                <li>¿Es el conjunto de los granos de arena en una playa finito o infinito? <strong>R: Finito (aunque muy grande)</strong></li>
+                                <li>Escribe el conjunto de los primeros 5 números impares. <strong>R: I = {1, 3, 5, 7, 9}</strong></li>
+                                <li>¿Son los conjuntos A={1,2} y B={2,1} iguales o diferentes? <strong>R: Iguales</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Intermedio</button><div class="accordion-content"><ol>
+                                <li>Si A={1,2,3} y B={3,4,5}, calcula A ∪ B (Unión). <strong>R: {1, 2, 3, 4, 5}</strong></li>
+                                <li>Si A={1,2,3} y B={3,4,5}, calcula A ∩ B (Intersección). <strong>R: {3}</strong></li>
+                                <li>Si U={1,2,3,4,5} y A={1,3}, calcula A' (Complemento de A). <strong>R: {2, 4, 5}</strong></li>
+                                <li>Si C={a,b,c} y D={d,e}, ¿cuál es C ∩ D? <strong>R: ∅ (Conjunto vacío)</strong></li>
+                                <li>Calcula la diferencia A - B si A={1,2,3,4} y B={3,4,5,6}. <strong>R: {1, 2}</strong></li>
+                                <li>¿Qué es B - A con los conjuntos del ejercicio anterior? <strong>R: {5, 6}</strong></li>
+                                <li>Si P={x | x es un número primo < 10} y I={x | x es un número impar < 10}, calcula P ∩ I. <strong>R: P={2,3,5,7}, I={1,3,5,7,9}. P ∩ I = {3, 5, 7}</strong></li>
+                                <li>Con P e I del ejercicio anterior, calcula P ∪ I. <strong>R: {1, 2, 3, 5, 7, 9}</strong></li>
+                                <li>¿Es F={a,b} un subconjunto de G={a,b,c}? <strong>R: Sí</strong></li>
+                                <li>Determina el conjunto potencia de A={1,2}. <strong>R: P(A) = {∅, {1}, {2}, {1,2}}</strong></li>
+                            </ol></div></div>
+                            <div class="accordion-item"><button class="accordion-header">Nivel Difícil</button><div class="accordion-content"><ol>
+                                <li>Calcula la diferencia simétrica A Δ B si A={1,2,3,4} y B={3,4,5,6}. <strong>R: (A-B)∪(B-A) = {1, 2, 5, 6}</strong></li>
+                                <li>En una clase de 30 alumnos, 18 juegan fútbol y 15 baloncesto. Si 8 juegan ambos, ¿cuántos no juegan ninguno? <strong>R: Solo F=10, Solo B=7. F∪B = 10+7+8=25. No juegan 30-25=5.</strong></li>
+                                <li>Si |A|=10, |B|=8 y |A∩B|=3, calcula |A∪B|. <strong>R: |A∪B| = |A|+|B|-|A∩B| = 10+8-3 = 15</strong></li>
+                                <li>Calcula (A ∪ B)' si U={1..10}, A={1,2,3} y B={3,4,5}. <strong>R: A∪B={1,2,3,4,5}. (A∪B)' = {6, 7, 8, 9, 10}</strong></li>
+                                <li>Calcula A' ∩ B' con los datos del ejercicio anterior. <strong>R: A'={4..10}, B'={1,2,6..10}. A'∩B' = {6,7,8,9,10} (Ley de Morgan)</strong></li>
+                                <li>De 100 personas, 40 leen la revista A, 50 leen la B, y 10 leen ambas. ¿Cuántas personas no leen ninguna? <strong>R: |A∪B|=40+50-10=80. No leen 100-80=20.</strong></li>
+                                <li>Si A ∩ B = ∅, ¿a qué es igual A - B? <strong>R: A</strong></li>
+                                <li>Si B es un subconjunto de A, ¿a qué es igual A ∩ B? <strong>R: B</strong></li>
+                                <li>Si B es un subconjunto de A, ¿a qué es igual A ∪ B? <strong>R: A</strong></li>
+                                <li>En una encuesta, 60% prefieren el producto A, 50% el B. Todos prefieren al menos uno. ¿Qué porcentaje prefiere ambos? <strong>R: 60+50=110. El exceso es la intersección: 10%.</strong></li>
+                            </ol></div></div>
+                        </div>
+                    </div>
+                    
+                    <a href="#menu" class="btn-retroceder nav-link">← Volver al Menú</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: QUIÉNES SOMOS -->
+        <section id="quienes-somos">
+            <div class="page-body">
+                 <div class="page-container">
+                    <h1>¿Quiénes Somos?</h1>
+                    <div class="content-box">
+                        <p>Somos un equipo de estudiantes de la institución educativa San José Veintiséis de Octubre, pertenecientes al grado de primero A.</p>
+                        <p>Buscamos realizar una página en donde los estudiantes puedan repasar clases, practicar y obtener consejos útiles para fortalecer sus habilidades matemáticas de una manera interactiva y amigable.</p>
+                    </div>
+                    <a href="#menu" class="btn-retroceder nav-link">← Volver al Menú</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: ORGANÍZATE -->
+        <section id="organizarte">
+            <div class="page-body">
+                <div class="page-container large">
+                    <h1>Mi Horario Semanal</h1>
+                    <p class="subtitulo">Haz clic en cualquier celda para editar tu horario. El contenido se guarda automáticamente en tu navegador.</p>
+                    <div class="schedule-container">
+                        <table class="schedule-table">
+                            <thead><tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th><th>Domingo</th></tr></thead>
+                            <tbody id="schedule-body"></tbody>
+                        </table>
+                    </div>
+                    <a href="#menu" class="btn-retroceder nav-link">← Volver al Menú</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    // --- LÓGICA DE LA APLICACIÓN (JAVASCRIPT) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('main > section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navigateTo = (hash) => {
+            if (!hash) hash = '#inicio';
+            sections.forEach(section => {
+                section.classList.toggle('active', '#' + section.id === hash);
+            });
+            if (hash === '#conceptos' && !document.getElementById('frequencyChart').chart) {
+                initConceptosPage();
+            }
+            if (hash === '#organizarte' && document.getElementById('schedule-body').innerHTML === '') {
+                initOrganizartePage();
+            }
+        };
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.hash = link.getAttribute('href');
+            });
+        });
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        navigateTo(window.location.hash || '#inicio');
+
+        const initConceptosPage = () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => {
+                        content.classList.toggle('active', content.id === button.dataset.tab);
+                    });
+                });
+            });
+            const ctx = document.getElementById('frequencyChart').getContext('2d');
+            document.getElementById('frequencyChart').chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nota 6', 'Nota 7', 'Nota 8', 'Nota 9', 'Nota 10'],
+                    datasets: [{
+                        label: 'Frecuencia Absoluta',
+                        data: [2, 5, 7, 4, 2],
+                        backgroundColor: 'rgba(124, 58, 237, 0.7)',
+                        borderColor: 'rgba(124, 58, 237, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        };
+
+        document.querySelectorAll(".accordion-header").forEach(header => {
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                const wasActive = header.classList.contains("active");
+                if (!wasActive) {
+                    header.classList.add("active");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    header.classList.remove("active");
+                    content.style.maxHeight = 0;
+                }
+            });
+        });
+        
+        const initOrganizartePage = () => {
+            const scheduleBody = document.getElementById('schedule-body');
+            const hours = Array.from({ length: 24 }, (_, i) => {
+                const hour = i % 12 === 0 ? 12 : i % 12;
+                const period = i < 12 ? 'AM' : 'PM';
+                return `${hour}:00 ${period}`;
+            });
+            hours.forEach((hour, hourIndex) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${hour}</td>` + Array(7).fill(0).map((_, dayIndex) => {
+                    const cellId = `cell-${hourIndex}-${dayIndex}`;
+                    const savedContent = localStorage.getItem(cellId) || '';
+                    return `<td id="${cellId}" contenteditable="true">${savedContent}</td>`;
+                }).join('');
+                scheduleBody.appendChild(row);
+            });
+            scheduleBody.addEventListener('input', (e) => {
+                if (e.target.tagName === 'TD' && e.target.isContentEditable) {
+                    localStorage.setItem(e.target.id, e.target.textContent);
+                }
+            });
+        };
+    });
+    </script>
+</body>
+</html>
